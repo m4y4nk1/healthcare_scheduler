@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Healthcare Scheduler</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="main-content">
+  <div class="container">
+    <div id="alerts-container"></div>
+
+    <div class="form-container">
+      <h2 class="form-title">Create an Account</h2>
+
+      <form id="register-form" class="needs-validation" novalidate>
+        <div class="form-group">
+          <label for="firstName" class="form-label">First Name</label>
+          <input type="text" class="form-control" id="firstName" required>
+          <div class="invalid-feedback">
+            Please enter your first name.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="lastName" class="form-label">Last Name</label>
+          <input type="text" class="form-control" id="lastName" required>
+          <div class="invalid-feedback">
+            Please enter your last name.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" required>
+          <div class="invalid-feedback">
+            Please enter a valid email address.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" required minlength="8">
+          <div class="invalid-feedback">
+            Password must be at least 8 characters long.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword" class="form-label">Confirm Password</label>
+          <input type="password" class="form-control" id="confirmPassword" required>
+          <div class="invalid-feedback">
+            Passwords do not match.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label d-block">I am a:</label>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="role-patient" name="role" class="custom-control-input" value="ROLE_PATIENT" checked>
+            <label class="custom-control-label" for="role-patient">Patient</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="role-doctor" name="role" class="custom-control-input" value="ROLE_DOCTOR">
+            <label class="custom-control-label" for="role-doctor">Doctor</label>
+          </div>
+        </div>
+
+        <div class="form-group" id="doctor-fields" style="display: none;">
+          <label for="specialty" class="form-label">Specialty</label>
+          <select class="form-control" id="specialty">
+            <option value="">Select Specialty</option>
+            <option th:each="specialty : ${specialties}" th:value="${specialty.id}" th:text="${specialty.name}"></option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </div>
+      </form>
+
+      <div class="text-center mt-3">
+        <p>Already have an account? <a th:href="@{/login}">Login</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script th:src="@{/js/main.js}"></script>
+<script>
+  // Show/hide doctor-specific fields
+  document.addEventListener('DOMContentLoaded', function() {
+    const doctorRadio = document.getElementById('role-doctor');
+    const patientRadio = document.getElementById('role-patient');
+    const doctorFields = document.getElementById('doctor-fields');
+
+    doctorRadio.addEventListener('change', function() {
+      doctorFields.style.display = 'block';
+    });
+
+    patientRadio.addEventListener('change', function() {
+      doctorFields.style.display = 'none';
+    });
+  });
+</script>
+</body>
+</html>

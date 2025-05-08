@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Manage Availability</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}">
+  <script th:src="@{/js/main.js}" defer></script>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+  <h2>Set Availability</h2>
+
+  <form id="availabilityForm">
+    <label>Date:</label>
+    <input type="date" name="date" required>
+
+    <label>Start Time:</label>
+    <input type="time" name="startTime" required>
+
+    <label>End Time:</label>
+    <input type="time" name="endTime" required>
+
+    <button type="submit" class="btn">Add Slot</button>
+  </form>
+
+  <h3>Existing Slots</h3>
+  <ul id="slotsList">
+    <!-- Dynamically populated via JS -->
+  </ul>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

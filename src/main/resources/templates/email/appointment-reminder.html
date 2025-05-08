@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Appointment Reminder</title>
+</head>
+<body>
+<p>Dear <span th:text="${patientName}">Patient</span>,</p>
+<p>This is a reminder for your upcoming appointment:</p>
+<ul>
+  <li>Date: <span th:text="${appointmentDate}">DATE</span></li>
+  <li>Time: <span th:text="${appointmentTime}">TIME</span></li>
+  <li>Doctor: <span th:text="${doctorName}">Doctor</span></li>
+</ul>
+<p>Please arrive 10 minutes early. See you soon!</p>
+</body>
+</html>

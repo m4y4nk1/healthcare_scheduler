@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Appointment Details</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+    <h2>Appointment Details</h2>
+    <div class="card">
+        <p><strong>Doctor:</strong> <span th:text="${appointment.doctorName}"></span></p>
+        <p><strong>Patient:</strong> <span th:text="${appointment.patientName}"></span></p>
+        <p><strong>Date & Time:</strong> <span th:text="${appointment.dateTime}"></span></p>
+        <p><strong>Status:</strong> <span th:text="${appointment.status}"></span></p>
+        <p><strong>Notes:</strong> <span th:text="${appointment.notes} ?: 'N/A'"></span></p>
+
+        <div th:if="${#authorization.expression('hasRole(''DOCTOR'')')}">
+            <a th:href="@{/medical-records/appointment/{id}(id=${appointment.id})}" class="btn">View Medical Record</a>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

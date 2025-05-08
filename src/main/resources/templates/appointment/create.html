@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Book Appointment</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}">
+  <script th:src="@{/js/main.js}" defer></script>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+  <h2>Book an Appointment</h2>
+
+  <form id="appointmentForm" th:action="@{/api/appointments}" method="post">
+    <label for="doctor">Select Doctor:</label>
+    <select name="doctorId" id="doctor" required>
+      <option value="">-- Choose Doctor --</option>
+      <option th:each="doc : ${doctors}" th:value="${doc.id}" th:text="${doc.name}">Doctor</option>
+    </select>
+
+    <label for="date">Select Date:</label>
+    <input type="date" id="date" name="date" required>
+
+    <label for="slot">Available Time Slots:</label>
+    <select name="slot" id="slot" required>
+      <!-- Populated via JS -->
+    </select>
+
+    <label for="notes">Notes (optional):</label>
+    <textarea id="notes" name="notes" rows="3"></textarea>
+
+    <button type="submit" class="btn">Confirm Appointment</button>
+  </form>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

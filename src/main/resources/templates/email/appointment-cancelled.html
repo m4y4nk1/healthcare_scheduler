@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Appointment Cancelled</title>
+</head>
+<body>
+<p>Dear <span th:text="${patientName}">Patient</span>,</p>
+<p>
+  Your appointment on
+  <strong th:text="${appointmentDate}">DATE</strong> at
+  <strong th:text="${appointmentTime}">TIME</strong> has been cancelled.
+</p>
+<p>Please contact us to reschedule if needed.</p>
+</body>
+</html>

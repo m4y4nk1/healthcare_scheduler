@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+<header class="header" th:fragment="header">
+  <div class="container">
+    <div class="header-inner">
+      <a th:href="@{/}" class="logo">
+        Healthcare Scheduler
+      </a>
+
+      <nav class="nav">
+        <!-- Always visible navigation items -->
+        <a th:href="@{/}" class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active' : ''}">Home</a>
+
+        <!-- Visible only when logged out -->
+        <div class="logged-out-only" style="display: none;">
+          <a th:href="@{/login}" class="nav-item">Login</a>
+          <a th:href="@{/register}" class="nav-item">Register</a>
+        </div>
+
+        <!-- Visible only when logged in -->
+        <div class="logged-in-only" style="display: none;">
+          <!-- Common for all users -->
+          <a th:href="@{/appointment/list}" class="nav-item">My Appointments</a>
+
+          <!-- For doctors only -->
+          <div class="doctor-only" style="display: none;">
+            <a th:href="@{/doctor/dashboard}" class="nav-item">Dashboard</a>
+            <a th:href="@{/doctor/availability}" class="nav-item">Availability</a>
+          </div>
+
+          <!-- For patients only -->
+          <div class="patient-only" style="display: none;">
+            <a th:href="@{/patient/dashboard}" class="nav-item">Dashboard</a>
+            <a th:href="@{/appointment/create}" class="nav-item">Book Appointment</a>
+          </div>
+
+          <!-- User dropdown -->
+          <div class="dropdown">
+            <a href="#" class="nav-item dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="user-name">User</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="userDropdown">
+              <a class="dropdown-item" th:href="@{/profile}">My Profile</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" id="logout-btn" href="#">Logout</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const token = localStorage.getItem('auth_token');
+    const userInfo = JSON.parse(localStorage.getItem('user_info') || '{}');
+
+    if (token) {
+      document.querySelectorAll('.logged-out-only').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('.logged-in-only').forEach(el => el.style.display = 'flex');
+
+      // Show role-specific navigation
+      if (userInfo.roles && userInfo.roles.includes('ROLE_DOCTOR')) {
+        document.querySelectorAll('.doctor-only').forEach(el => el.style.display = 'block');
+        document.querySelectorAll('.patient-only').forEach(el => el.style.display = 'none');
+      } else if (userInfo.roles && userInfo.roles.includes('ROLE_PATIENT')) {
+        document.querySelectorAll('.doctor-only').forEach(el => el.style.display = 'none');
+        document.querySelectorAll('.patient-only').forEach(el => el.style.display = 'block');
+      }
+
+      // Set user name
+      if (userInfo.firstName && userInfo.lastName) {
+        document.querySelectorAll('.user-name').forEach(el => {
+          el.textContent = `${userInfo.firstName} ${userInfo.lastName}`;
+        });
+      }
+    } else {
+      document.querySelectorAll('.logged-in-only').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('.logged-out-only').forEach(el => el.style.display = 'flex');
+    }
+  });
+</script>
+</body>
+</html>

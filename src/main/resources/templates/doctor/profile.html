@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Doctor Profile</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+  <h2>My Profile</h2>
+  <p><strong>Name:</strong> <span th:text="${doctor.name}"></span></p>
+  <p><strong>Email:</strong> <span th:text="${doctor.email}"></span></p>
+  <p><strong>Specialty:</strong> <span th:text="${doctor.specialtyName}"></span></p>
+  <p><strong>Experience:</strong> <span th:text="${doctor.experience}"></span> years</p>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

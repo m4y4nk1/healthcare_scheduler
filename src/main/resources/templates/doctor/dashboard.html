@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Doctor Dashboard</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+  <h2>Welcome, Dr. <span th:text="${doctor.name}"></span></h2>
+
+  <div class="dashboard-grid">
+    <div class="card">
+      <h3>Total Appointments</h3>
+      <p th:text="${appointmentCount}">0</p>
+    </div>
+    <div class="card">
+      <h3>Upcoming Today</h3>
+      <p th:text="${todayAppointments}">0</p>
+    </div>
+    <div class="card">
+      <h3>Patients Treated</h3>
+      <p th:text="${patientCount}">0</p>
+    </div>
+  </div>
+
+  <a th:href="@{/doctor/profile}" class="btn">View Profile</a>
+  <a th:href="@{/availability}" class="btn">Manage Availability</a>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

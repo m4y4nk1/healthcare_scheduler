@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Patient Profile</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+  <h2>My Profile</h2>
+  <p><strong>Name:</strong> <span th:text="${patient.name}"></span></p>
+  <p><strong>Email:</strong> <span th:text="${patient.email}"></span></p>
+  <p><strong>Gender:</strong> <span th:text="${patient.gender}"></span></p>
+  <p><strong>Age:</strong> <span th:text="${patient.age}"></span></p>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

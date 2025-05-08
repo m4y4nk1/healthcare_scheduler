@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Healthcare Scheduler</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+<!-- Include header -->
+<div th:replace="fragments/header :: header"></div>
+
+<main>
+  <h1>Welcome to Healthcare Scheduler</h1>
+  <p>This platform allows doctors and patients to manage appointments and medical records efficiently.</p>
+
+  <div>
+    <a th:href="@{/auth/login}">Login</a> |
+    <a th:href="@{/auth/register}">Register</a>
+  </div>
+
+  <div style="margin-top:20px;">
+    <a th:href="@{/doctor/dashboard}">Doctor Dashboard</a> |
+    <a th:href="@{/patient/dashboard}">Patient Dashboard</a>
+  </div>
+</main>
+
+<!-- Include footer -->
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
