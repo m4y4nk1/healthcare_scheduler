@@ -32,28 +32,6 @@ Hosted locally — Run instructions below.
 
 ---
 
-## 📁 Project Structure
-
-src/
-├── main/
-│ ├── java/
-│ │ └── com/example/healthcarescheduler/
-│ │ ├── controller/
-│ │ ├── service/
-│ │ ├── security/
-│ │ ├── repository/
-│ │ ├── model/
-│ │ ├── dto/
-│ │ └── config/
-│ └── resources/
-│ ├── templates/
-│ ├── static/
-│ └── application.properties
-
-yaml
-Copy
-Edit
-
 ---
 
 ## 🛠️ How to Run
@@ -66,17 +44,12 @@ cd healthcare_scheduler
 Update src/main/resources/application.properties:
 
 properties
-Copy
-Edit
 spring.datasource.url=jdbc:postgresql://localhost:5432/healthcare_scheduler
 spring.datasource.username=postgres
 spring.datasource.password=your_password
 3. Run the App
 Using Maven wrapper:
 
-bash
-Copy
-Edit
 ./mvnw spring-boot:run
 Or using IntelliJ:
 
